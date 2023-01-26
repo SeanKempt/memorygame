@@ -18,6 +18,7 @@ const App = () => {
       ...score,
       currentScore: 0,
     });
+    return score;
   };
 
   useEffect(() => {

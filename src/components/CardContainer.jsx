@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 import Card from './Card';
@@ -18,60 +18,52 @@ const CardContainer = (props) => {
   ]);
 
   const resetClickedFruits = () => {
-    const newArray = fruits.map((f) => {
-      f.clicked = false;
-      return f;
-    });
+    const newArray = fruits.map((f) => ({ ...f, clicked: false }));
     setFruits(newArray);
   };
 
   const shuffleArray = () => {
-    // this is where the problem is; even though we are setting the the state to something else its not changing!!!!!
     const array = [...fruits];
     const shuffledArray = array
       .map((value) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value);
     setFruits(shuffledArray);
-    console.log(fruits);
   };
 
+  // the problem is multiple updates in a single function.
   const handleClickedFruit = (fruit) => {
     const index = fruits.findIndex((e) => e.id === fruit.id);
-    const newArray = fruits.map((f, i) => {
-      if (i === index) {
-        if (f.clicked === false) {
-          f.clicked = true;
-          increaseScore();
-          shuffleArray();
-        } else {
+    setFruits((pendingState) =>
+      pendingState.map((f, i) => {
+        if (i === index) {
+          if (f.clicked === false) {
+            increaseScore();
+            return { ...f, clicked: true };
+          }
           resetScore();
           resetClickedFruits();
         }
         return f;
-      }
-      return f;
-    });
-    setFruits(newArray);
+      })
+    );
   };
 
-  useEffect(() => {
-    console.log(`hello`);
-  }, [fruits]);
-
-  const renderFruits = () =>
-    fruits.map((fruit) => (
-      <Card
-        name={fruit.name}
-        photo={fruit.photo}
-        key={fruit.id}
-        onClick={() => {
-          handleClickedFruit(fruit);
-        }}
-      />
-    ));
-
-  return <div className="card-container">{renderFruits()}</div>;
+  return (
+    <div className="card-container">
+      {fruits.map((fruit) => (
+        <Card
+          name={fruit.name}
+          photo={fruit.photo}
+          key={fruit.id}
+          onClick={() => {
+            shuffleArray();
+            handleClickedFruit(fruit); // this is the source of the problem. Its updating state within the same line not queuing so its only preforming the last step
+          }}
+        />
+      ))}
+    </div>
+  );
 };
 
 CardContainer.propTypes = {
