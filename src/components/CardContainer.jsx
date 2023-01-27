@@ -22,12 +22,11 @@ const CardContainer = (props) => {
     setFruits(newArray);
   };
 
-  const shuffleArray = (array) => {
+  const shuffleArray = (array) =>
     array
       .map((value) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value);
-  };
 
   // the problem is multiple updates in a single function.
   const handleClickedFruit = (fruit) => {
@@ -40,7 +39,10 @@ const CardContainer = (props) => {
       setFruits((pendingState) => {
         const updatedFruits = pendingState.map((f) => {
           if (f.id === fruit.id) {
-            return fruit;
+            return {
+              ...f,
+              clicked: true,
+            };
           }
           return f;
         });
@@ -57,7 +59,6 @@ const CardContainer = (props) => {
           photo={fruit.photo}
           key={fruit.id}
           onClick={() => {
-            shuffleArray();
             handleClickedFruit(fruit); // this is the source of the problem. Its updating state within the same line not queuing so its only preforming the last step
           }}
         />
