@@ -22,31 +22,31 @@ const CardContainer = (props) => {
     setFruits(newArray);
   };
 
-  const shuffleArray = () => {
-    const array = [...fruits];
-    const shuffledArray = array
+  const shuffleArray = (array) => {
+    array
       .map((value) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value);
-    setFruits(shuffledArray);
   };
 
   // the problem is multiple updates in a single function.
   const handleClickedFruit = (fruit) => {
-    const index = fruits.findIndex((e) => e.id === fruit.id);
-    setFruits((pendingState) =>
-      pendingState.map((f, i) => {
-        if (i === index) {
-          if (f.clicked === false) {
-            increaseScore();
-            return { ...f, clicked: true };
+    if (fruit.clicked) {
+      resetScore();
+      resetClickedFruits();
+    } else {
+      fruit.clicked = true;
+      increaseScore();
+      setFruits((pendingState) => {
+        const updatedFruits = pendingState.map((f) => {
+          if (f.id === fruit.id) {
+            return fruit;
           }
-          resetScore();
-          resetClickedFruits();
-        }
-        return f;
-      })
-    );
+          return f;
+        });
+        return shuffleArray(updatedFruits);
+      });
+    }
   };
 
   return (
