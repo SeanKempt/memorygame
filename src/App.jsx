@@ -35,7 +35,7 @@ const App = () => {
   return (
     <div className="wrapper">
       <header className="header">
-        <h1>Memory Game</h1>
+        <h1 className="text-3xl">Memory Game</h1>
         <div className="scoreboard">
           <ScoreBoard score={score} />
         </div>

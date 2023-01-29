@@ -5,7 +5,7 @@ const Card = (props) => {
   const { name, photo, onClick } = props;
   return (
     <div className="card" role="button" tabIndex={0} onClick={onClick}>
-      <img src={photo} alt={name} />
+      <img className="object-scale-down" src={photo} alt={name} />
       <h3>{name}</h3>
     </div>
   );
