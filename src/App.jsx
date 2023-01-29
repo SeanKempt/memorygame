@@ -34,16 +34,16 @@ const App = () => {
 
   return (
     <div>
-      <header className="header">
-        <h1 className="text-3xl">Memory Game</h1>
-        <div className="scoreboard">
+      <header className="header text-bg-dark">
+        <h1 className="text-3xl mx-5g">Memory Game</h1>
+        <div className="scoreboard mx-5">
           <ScoreBoard score={score} />
         </div>
       </header>
       <main className="main-content d-flex align-items-center">
         <CardContainer increaseScore={increaseScore} resetScore={resetScore} />
       </main>
-      <footer className="footer d-flex justify-content-center align-items-center">
+      <footer className="footer d-flex justify-content-center align-items-center text-bg-dark">
         <p>Made by Sean Kempt</p>
       </footer>
     </div>

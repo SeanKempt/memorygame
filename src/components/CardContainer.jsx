@@ -7,14 +7,14 @@ import imgs from '../helpers/images.js';
 const CardContainer = (props) => {
   const { increaseScore, resetScore } = props;
   const [fruits, setFruits] = useState([
-    { name: `bananas`, clicked: false, photo: imgs.bananas, id: uniqid() },
-    { name: `apple`, clicked: false, photo: imgs.apples, id: uniqid() },
-    { name: `orange`, clicked: false, photo: imgs.orange, id: uniqid() },
-    { name: `grapes`, clicked: false, photo: imgs.grapes, id: uniqid() },
-    { name: `kiwi`, clicked: false, photo: imgs.kiwi, id: uniqid() },
-    { name: `mango`, clicked: false, photo: imgs.mango, id: uniqid() },
-    { name: `pineapple`, clicked: false, photo: imgs.pineapple, id: uniqid() },
-    { name: `cherry`, clicked: false, photo: imgs.cherry, id: uniqid() },
+    { name: `Bananas`, clicked: false, photo: imgs.bananas, id: uniqid() },
+    { name: `Apple`, clicked: false, photo: imgs.apples, id: uniqid() },
+    { name: `Orange`, clicked: false, photo: imgs.orange, id: uniqid() },
+    { name: `Grapes`, clicked: false, photo: imgs.grapes, id: uniqid() },
+    { name: `Kiwi`, clicked: false, photo: imgs.kiwi, id: uniqid() },
+    { name: `Mango`, clicked: false, photo: imgs.mango, id: uniqid() },
+    { name: `Pineapple`, clicked: false, photo: imgs.pineapple, id: uniqid() },
+    { name: `Cherry`, clicked: false, photo: imgs.cherry, id: uniqid() },
   ]);
 
   const resetClickedFruits = () => {
