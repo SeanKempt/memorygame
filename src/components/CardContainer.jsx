@@ -52,17 +52,19 @@ const CardContainer = (props) => {
   };
 
   return (
-    <div className="card-container">
-      {fruits.map((fruit) => (
-        <Card
-          name={fruit.name}
-          photo={fruit.photo}
-          key={fruit.id}
-          onClick={() => {
-            handleClickedFruit(fruit); // this is the source of the problem. Its updating state within the same line not queuing so its only preforming the last step
-          }}
-        />
-      ))}
+    <div className="container d-grid">
+      <div className="row row-cols-5 justify-content-center">
+        {fruits.map((fruit) => (
+          <Card
+            name={fruit.name}
+            photo={fruit.photo}
+            key={fruit.id}
+            onClick={() => {
+              handleClickedFruit(fruit); // this is the source of the problem. Its updating state within the same line not queuing so its only preforming the last step
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };

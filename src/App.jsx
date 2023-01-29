@@ -33,17 +33,17 @@ const App = () => {
   // leverage useEffect to bring the bestScore up to date with the currentScore
 
   return (
-    <div className="wrapper">
+    <div>
       <header className="header">
         <h1 className="text-3xl">Memory Game</h1>
         <div className="scoreboard">
           <ScoreBoard score={score} />
         </div>
       </header>
-      <main className="main-content">
+      <main className="main-content d-flex align-items-center">
         <CardContainer increaseScore={increaseScore} resetScore={resetScore} />
       </main>
-      <footer className="footer">
+      <footer className="footer d-flex justify-content-center align-items-center">
         <p>Made by Sean Kempt</p>
       </footer>
     </div>

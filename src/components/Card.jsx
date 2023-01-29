@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const Card = (props) => {
   const { name, photo, onClick } = props;
   return (
-    <div className="card" role="button" tabIndex={0} onClick={onClick}>
-      <img className="object-scale-down" src={photo} alt={name} />
+    <div className="card col m-3" role="button" tabIndex={0} onClick={onClick}>
+      <img className="object-fit-scale" src={photo} alt={name} />
       <h3>{name}</h3>
     </div>
   );
