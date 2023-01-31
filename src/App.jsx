@@ -12,7 +12,6 @@ const App = () => {
       ...score,
       currentScore: score.currentScore + 1,
     });
-    showModal(); // remove this after testing the modal further
     return score;
   };
 
@@ -24,9 +23,11 @@ const App = () => {
     return score;
   };
 
-  const showModal = () => {
-    if (score.currentScore === 2) {
+  const changeGameStatus = () => {
+    if (gameover === false) {
       setGameOver(true);
+    } else {
+      setGameOver(false);
     }
   };
 
@@ -37,41 +38,21 @@ const App = () => {
         bestScore: score.currentScore,
       });
     }
-    console.log(gameover);
-  }, [score, gameover]);
+
+    if (score.currentScore > 7) {
+      setGameOver(true);
+    }
+  }, [score]);
 
   // leverage useEffect to bring the bestScore up to date with the currentScore
-  if (gameover === true) {
-    return (
-      <div>
-        <GameOverModal
-          show={gameover}
-          onHide={() => {
-            setGameOver(false);
-          }}
-        />
-        <div>
-          <header className="header text-bg-dark">
-            <h1 className="mx-5">Memory Game</h1>
-            <div className="scoreboard mx-5">
-              <ScoreBoard score={score} />
-            </div>
-          </header>
-          <main className="main-content d-flex align-items-center">
-            <CardContainer
-              increaseScore={increaseScore}
-              resetScore={resetScore}
-            />
-          </main>
-          <footer className="footer d-flex justify-content-center align-items-center text-bg-dark">
-            <p>Made by Sean Kempt</p>
-          </footer>
-        </div>
-      </div>
-    );
-  }
   return (
     <div>
+      <GameOverModal
+        show={gameover}
+        onHide={() => {
+          setGameOver(false);
+        }}
+      />
       <header className="header text-bg-dark">
         <h1 className="mx-5">Memory Game</h1>
         <div className="scoreboard mx-5">
@@ -79,7 +60,11 @@ const App = () => {
         </div>
       </header>
       <main className="main-content d-flex align-items-center">
-        <CardContainer increaseScore={increaseScore} resetScore={resetScore} />
+        <CardContainer
+          increaseScore={increaseScore}
+          resetScore={resetScore}
+          changeGameStatus={changeGameStatus}
+        />
       </main>
       <footer className="footer d-flex justify-content-center align-items-center text-bg-dark">
         <p>Made by Sean Kempt</p>

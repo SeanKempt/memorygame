@@ -5,7 +5,7 @@ import Card from './Card';
 import imgs from '../helpers/images.js';
 
 const CardContainer = (props) => {
-  const { increaseScore, resetScore } = props;
+  const { increaseScore, resetScore, changeGameStatus } = props;
   const [fruits, setFruits] = useState([
     { name: `Bananas`, clicked: false, photo: imgs.bananas, id: uniqid() },
     { name: `Apple`, clicked: false, photo: imgs.apples, id: uniqid() },
@@ -31,6 +31,7 @@ const CardContainer = (props) => {
   // the problem is multiple updates in a single function.
   const handleClickedFruit = (fruit) => {
     if (fruit.clicked) {
+      changeGameStatus();
       resetScore();
       resetClickedFruits();
     } else {
@@ -72,6 +73,7 @@ const CardContainer = (props) => {
 CardContainer.propTypes = {
   increaseScore: PropTypes.func,
   resetScore: PropTypes.func,
+  changeGameStatus: PropTypes.func,
 };
 
 export default CardContainer;

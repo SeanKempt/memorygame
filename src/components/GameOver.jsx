@@ -18,8 +18,7 @@ const GameOverModal = (props) => {
         <p>Do you want to play again?</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
-        <Button>Play Again</Button>
+        <Button onClick={onHide}>Play Again</Button>
       </Modal.Footer>
     </Modal>
   );
